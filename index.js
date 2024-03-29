@@ -9,10 +9,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get('/', (req, res) => {
+    // const textInput = req.body.textInput;
+    // console.log("received text:", textInput);
+    // res.send("form submitted successfully!")
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+})
+
+app.post('/submit', (req, res) => {
     const textInput = req.body.textInput;
-    console.log("received text:", textInput);
-    res.send("form submitted successgully!")
-    // res.sendFile(path.join(__dirname, "public", "index.html"));
+    console.log("received text: ", textInput);
+    res.redirect('/success');
+})
+
+app.get('/success', (req, res) => {
+    res.send("Form submitted successfully!")
 })
 
 app.listen(port, () => {
